@@ -24,13 +24,13 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        //
-        $validated = $request->validated();
+            //
+            $validated = $request->validated();
 
-        $validated ['password'] = Hash::make($validated['password']);
-        $user = User::create($validated); 
+            $validated ['password'] = Hash::make($validated['password']);
+            $user = User::create($validated); 
 
-        return $user;
+            return $user;
     }
 
    /**
@@ -45,16 +45,53 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UserController $request, string $id)
+    public function update(UserRequest $request, string $id)
     {
         //
-        $user = $request->validated();
-
         $user = User::findOrFail($id);
-        $user ->update($validated); 
+
+        $validated = $request->validated();
+ 
+        $user->name = $validated['name'];
+ 
+        $user->save();
 
         return $user;
     }
+
+    /**
+     * Update the email of the specified resource in storage.
+     */
+    public function email(UserRequest $request, string $id)
+    {   
+        //
+        $user = User::findOrFail($id);
+
+        $validated = $request->validated();
+ 
+        $user->email = $validated['email'];
+ 
+        $user->save();
+
+        return $user;
+    }
+    /**
+     * Update the password of the specified resource in storage.
+     */
+    public function password(UserRequest $request, string $id)
+    {
+        //
+        $user = User::findOrFail($id);
+
+        $validated = $request->validated();
+ 
+        $user->password = $validated['password'];
+ 
+        $user->save();
+
+        return $user;
+    }
+
 
     /**
      * Remove the specified resource from storage.

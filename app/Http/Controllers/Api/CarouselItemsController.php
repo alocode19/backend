@@ -31,7 +31,7 @@ class CarouselItemsController extends Controller
 
         return  $carouselItem;  
     }
-
+ 
     /**
      * Display the specified resource.
      */
@@ -61,10 +61,10 @@ class CarouselItemsController extends Controller
     public function destroy(string $id)
     {
         //
-        $carouselItem = CarouselItems::findOrFail($id);
+            $carouselItem = CarouselItems::findOrFail($id);
 
-        $carouselItem->delete();
+            $carouselItem->delete();
 
-        return $carouselItem;
+            return $carouselItem;
     }
 }
