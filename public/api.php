@@ -20,6 +20,7 @@ use App\Http\Controllers\Api\CarouselItemsController;
 */
 //Public APIs
 Route::controller(AuthController::class)->group(function (){
+    Route::post('/signup',[AuthController::class,'signup'])->name('user.signup');
     Route::post('/login',[AuthController::class,'login'])->name('user.login');
     Route::post('/user',                 'store')->name('user.store');
 
@@ -38,6 +39,7 @@ Route::controller(AuthController::class)->group(function (){
         Route::put('/carousel/{id}',        'update');
         Route::delete('/carousel/{id}',     'destroy');
     });
+
     Route::controller(UserController::class)->group(function (){
         Route::get('/user',                 'index');
         Route::get('/user/{id}',            'show');
