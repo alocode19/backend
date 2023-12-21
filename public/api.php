@@ -48,6 +48,7 @@ Route::controller(AuthController::class)->group(function (){
         Route::delete('/user/{id}',         'destroy');
 
     });
+    
 //User Specific API
     Route::get('/profile/show',            [ProfileController::class, 'show']);
     Route::put('/profile/image',            [ProfileController::class, 'image'])->name('profile.image');
