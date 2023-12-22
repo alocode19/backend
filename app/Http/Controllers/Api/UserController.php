@@ -78,6 +78,23 @@ class UserController extends Controller
     /**
      * Update the password of the specified resource in storage.
      */
+    public function image(UserRequest $request, string $id)
+    {
+        //
+        $user = User::findOrFail($id);
+
+        $validated = $request->validated();
+ 
+        $user->password = $validated['image'];
+ 
+        $user->save();
+
+        return $user;
+    }
+
+    /**
+     * Update the password of the specified resource in storage.
+     */
     public function password(UserRequest $request, string $id)
     {
         //
@@ -91,6 +108,7 @@ class UserController extends Controller
 
         return $user;
     }
+
 
 
     /**

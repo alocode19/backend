@@ -21,10 +21,12 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
+        
         if( request()->routeIs('user.store')){
         return [
             //
                   'name'          => 'required|string|max:255',
+                  'username'      =>  'required|string|unique:App\Models\User,password|password|max:255',
                   'email'         => 'required|string|unique:App\Models\User,email|email|max:255', 
                  'password'      => 'required|min:8',
             ];
@@ -47,6 +49,8 @@ class UserRequest extends FormRequest
                     'password'          => 'required|confirmed|min:8',
                 ];
             }
+        
+        
     }
+    
 }
- 
