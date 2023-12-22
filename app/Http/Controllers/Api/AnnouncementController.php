@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Announcement;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\AnnouncementRequest;
+
 
 class AnnouncementController extends Controller
 {
@@ -13,22 +16,22 @@ class AnnouncementController extends Controller
     public function index()
     {
         //
-    }
+        return Announcement::all();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AnnouncementRequest $request)
     {
-        //
+    //
+    // Retrieve the validated input data...
+    $validated = $request->validated();
+
+    $announcement = Announcement::create($validated);
+
+    return  $announcement;
     }
 
     /**
@@ -37,22 +40,22 @@ class AnnouncementController extends Controller
     public function show(string $id)
     {
         //
-    }
+        return Announcement::findOrFail($id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(AnnouncementRequest $request, string $id)
     {
         //
+        $validated = $request->validated();
+
+        $announcement = Announcement::findOrFail($id);
+        $announcement ->update($validated); 
+
+        return $announcement;
     }
 
     /**
@@ -61,5 +64,10 @@ class AnnouncementController extends Controller
     public function destroy(string $id)
     {
         //
+        $announcement = Announcement::findOrFail($id);
+
+        $announcement->delete();
+
+        return $announcement;
     }
 }

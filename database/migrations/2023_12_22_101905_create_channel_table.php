@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('description')->nullable();
 
         });
+        Schema::table('channel', function (Blueprint $table) {
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+        });
     }
 
     /**
